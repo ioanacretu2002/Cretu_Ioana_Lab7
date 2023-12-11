@@ -18,12 +18,12 @@ namespace Cretu_Ioana_Lab7.Data
             _database.CreateTableAsync<ShopList>().Wait();
             _database.CreateTableAsync<Product>().Wait();
             _database.CreateTableAsync<ListProduct>().Wait();
+            _database.CreateTableAsync<Shop>().Wait();
         }
         public Task<List<ShopList>> GetShopListsAsync()
         {
             return _database.Table<ShopList>().ToListAsync();
         }
-        //urm nu e in lab
         public Task<ShopList> GetShopListAsync(int id)
         {
             return _database.Table<ShopList>()
@@ -45,7 +45,6 @@ namespace Cretu_Ioana_Lab7.Data
         {
             return _database.DeleteAsync(slist);
         }
-        //de aici este
         public Task<int> SaveProductAsync(Product product)
         {
             if (product.ID != 0)
@@ -92,6 +91,24 @@ namespace Cretu_Ioana_Lab7.Data
         {
             return _database.Table<ListProduct>().ToListAsync();
         }
+
+        //lab10
+        public Task<List<Shop>> GetShopsAsync()
+        {
+            return _database.Table<Shop>().ToListAsync();
+        }
+        public Task<int> SaveShopAsync(Shop shop)
+        {
+            if (shop.ID != 0)
+            {
+                return _database.UpdateAsync(shop);
+            }
+            else
+            {
+                return _database.InsertAsync(shop);
+            }
+        }
+
 
     }
 }
